@@ -1,8 +1,10 @@
 import AppError from "../../errorHelpers/AppError";
-import { IUser } from "./user.interface";
+import { IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 import httpStatusCode from "http-status-codes";
 import bcryptjs from "bcryptjs";
+import { envVars } from "../../config/env";
+import { JwtPayload } from "jsonwebtoken";
 
 const createUser = async (payload: Partial<IUser>) => {
   const { email, password, ...rest } = payload;
@@ -11,7 +13,10 @@ const createUser = async (payload: Partial<IUser>) => {
     throw new AppError(httpStatusCode.BAD_REQUEST, "User already exists");
   }
 
-  const hashPassword = await bcryptjs.hash(password as string, 10);
+  const hashPassword = await bcryptjs.hash(
+    password as string,
+    Number(envVars.BCRYPT_SALT_ROUND)
+  );
 
   const user = await User.create({
     email,
@@ -19,6 +24,57 @@ const createUser = async (payload: Partial<IUser>) => {
     ...rest,
   });
   return user;
+};
+
+const updateUser = async (
+  userId: string,
+  payload: Partial<IUser>,
+  decodedToken: JwtPayload
+) => {
+  const ifUserExist = await User.findById(userId);
+
+  if (!ifUserExist) {
+    throw new AppError(httpStatusCode.NOT_FOUND, "User does not exist");
+  }
+
+  if (payload.role) {
+    if (decodedToken.role === Role.USER || decodedToken.role === Role.GUIDE) {
+      throw new AppError(
+        httpStatusCode.FORBIDDEN,
+        "You are not authrized for tjis changes"
+      );
+    }
+
+    if (payload.role === Role.SUPER_ADMIN && decodedToken.role === Role.ADMIN) {
+      throw new AppError(
+        httpStatusCode.FORBIDDEN,
+        "You are not authrized for tjis changes"
+      );
+    }
+  }
+
+  if (payload.isActive || payload.isDeleted || payload.isVerified) {
+    if (decodedToken.role === Role.GUIDE || decodedToken.role === Role.GUIDE) {
+      throw new AppError(
+        httpStatusCode.FORBIDDEN,
+        "You are not authrized for tjis changes"
+      );
+    }
+  }
+
+  if (payload.password) {
+    payload.password = await bcryptjs.hash(
+      payload.password,
+      envVars.BCRYPT_SALT_ROUND
+    );
+  }
+
+  const newUpdateUser = await User.findByIdAndUpdate(userId, payload, {
+    new: true,
+    runValidators: true,
+  });
+
+  return newUpdateUser;
 };
 
 const getAllUsers = async () => {
@@ -29,5 +85,6 @@ const getAllUsers = async () => {
 
 export const UserServices = {
   createUser,
+  updateUser,
   getAllUsers,
 };

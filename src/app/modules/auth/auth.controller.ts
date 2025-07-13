@@ -12,7 +12,7 @@ const credentialsLogin = catchAsync(
       statusCode: httpStatusCode.OK,
       success: true,
       message: "User logged in successfully",
-      data: loginInfo.email,
+      data: loginInfo.accessToken,
     });
   }
 );

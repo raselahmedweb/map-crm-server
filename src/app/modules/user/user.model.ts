@@ -55,7 +55,7 @@ const userSchema = new Schema<IUser>(
       enum: Object.values(IsActive),
       default: IsActive.ACTIVE,
     },
-    isVarified: {
+    isVerified: {
       type: Boolean,
       default: false,
     },
