@@ -12,11 +12,27 @@ const credentialsLogin = catchAsync(
       statusCode: httpStatusCode.OK,
       success: true,
       message: "User logged in successfully",
-      data: loginInfo.accessToken,
+      data: loginInfo,
+    });
+  }
+);
+
+const getNewAccessToken = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const refresToken = req.headers.authorization;
+    const loginInfo = await AuthServices.getNewAccessToken(
+      refresToken as string
+    );
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "Refresh token",
+      data: loginInfo,
     });
   }
 );
 
 export const AuthControllers = {
   credentialsLogin,
+  getNewAccessToken,
 };
