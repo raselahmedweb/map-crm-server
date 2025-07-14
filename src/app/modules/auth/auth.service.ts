@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import AppError from "../../errorHelpers/AppError";
 import { IUser } from "../user/user.interface";
 import { User } from "../user/user.model";
 import httpStatusCode from "http-status-codes";
 import bcryptjs from "bcryptjs";
-import { createUserToken } from "../../utils/userToken";
-import { generateToken, verifyToken } from "../../utils/jwt";
-import { envVars } from "../../config/env";
+import {
+  createNewAccessTokenWithRefreshToken,
+  createUserToken,
+} from "../../utils/userToken";
 import { JwtPayload } from "jsonwebtoken";
+import { envVars } from "../../config/env";
 
 const credentialsLogin = async (payload: Partial<IUser>) => {
   const { email, password } = payload;
@@ -38,39 +41,39 @@ const credentialsLogin = async (payload: Partial<IUser>) => {
   };
 };
 const getNewAccessToken = async (refreshToken: string) => {
-  const verifiedToken = verifyToken(
-    refreshToken,
-    envVars.JWT_REFRESH_SECRET
-  ) as JwtPayload;
-
-  const isExistUser = await User.findOne({ email: verifiedToken.email });
-
-  if (!isExistUser) {
-    throw new AppError(httpStatusCode.NOT_FOUND, "Email does not exist");
-  }
-
-  if (isExistUser.isDeleted) {
-    throw new AppError(httpStatusCode.FORBIDDEN, "User is deleted");
-  }
-
-  const jwtPayload = {
-    userId: isExistUser._id,
-    email: isExistUser.email,
-    role: isExistUser.role,
-  };
-
-  const accessToken = generateToken(
-    jwtPayload,
-    envVars.JWT_ACCESS_SECRET,
-    envVars.JWT_ACCESS_EXPIRES
-  );
+  const newToken = await createNewAccessTokenWithRefreshToken(refreshToken);
 
   return {
-    accessToken,
+    accessToken: newToken,
   };
+};
+const resetPassword = async (
+  oldPassword: string,
+  newPassword: string,
+  decodedToken: JwtPayload
+) => {
+  const user = await User.findById(decodedToken.userId);
+
+  const isPasswordMatched = await bcryptjs.compare(
+    oldPassword,
+    user!.password as string
+  );
+  if (!isPasswordMatched) {
+    throw new AppError(
+      httpStatusCode.UNAUTHORIZED,
+      "Old password does not match"
+    );
+  }
+
+  user!.password = await bcryptjs.hash(
+    newPassword,
+    Number(envVars.BCRYPT_SALT_ROUND)
+  );
+  user!.save();
 };
 
 export const AuthServices = {
   credentialsLogin,
   getNewAccessToken,
+  resetPassword,
 };

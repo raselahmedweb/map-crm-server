@@ -6,7 +6,7 @@ export interface IItemsOnMap {
   mapId: Types.ObjectId;
   userId: Types.ObjectId;
   description: string;
-  domElementId: string;
+  domElementId?: string;
   isFinished: boolean;
   x: number;
   y: number;

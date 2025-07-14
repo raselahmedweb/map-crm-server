@@ -4,10 +4,13 @@ import { catchAsync } from "../../utils/catchAsync";
 import { AuthServices } from "./auth.service";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
+import AppError from "../../errorHelpers/AppError";
+import { setCookie } from "../../utils/setCookie";
 
 const credentialsLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const loginInfo = await AuthServices.credentialsLogin(req.body);
+    setCookie(res, loginInfo);
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
@@ -19,15 +22,65 @@ const credentialsLogin = catchAsync(
 
 const getNewAccessToken = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const refresToken = req.headers.authorization;
-    const loginInfo = await AuthServices.getNewAccessToken(
+    const refresToken = req.cookies.refreshToken;
+
+    if (!refresToken) {
+      throw new AppError(
+        httpStatusCode.BAD_REQUEST,
+        "No refresh token received from cookie"
+      );
+    }
+
+    const tokenInfo = await AuthServices.getNewAccessToken(
       refresToken as string
     );
+
+    setCookie(res, tokenInfo);
+
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Refresh token",
-      data: loginInfo,
+      message: "Get new accesstoken successfully",
+      data: tokenInfo,
+    });
+  }
+);
+const logout = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    });
+
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    });
+
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "User logged out successfully",
+      data: null,
+    });
+  }
+);
+const resetPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = req.user;
+
+    const newPassword = req.body.newPassword;
+    const oldPassword = req.body.oldPassword;
+
+    await AuthServices.resetPassword(oldPassword, newPassword, decodedToken);
+
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "Password changed successfully",
+      data: null,
     });
   }
 );
@@ -35,4 +88,6 @@ const getNewAccessToken = catchAsync(
 export const AuthControllers = {
   credentialsLogin,
   getNewAccessToken,
+  logout,
+  resetPassword,
 };

@@ -23,4 +23,4 @@ const invitationSchema = new Schema<IInvitation>(
   }
 );
 
-export const Invitation = model<IInvitation>("Invitation", invitationSchema);
+export const Invitation = model<IInvitation>("invitations", invitationSchema);

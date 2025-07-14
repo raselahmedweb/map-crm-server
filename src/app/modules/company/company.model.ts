@@ -16,4 +16,4 @@ const companySchema = new Schema<ICompany>(
   { versionKey: false, timestamps: true }
 );
 
-export const Company = model<ICompany>("Company", companySchema);
+export const Company = model<ICompany>("company", companySchema);

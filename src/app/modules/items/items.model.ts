@@ -23,4 +23,4 @@ const itemSchema = new Schema<IItem>(
   { versionKey: false }
 );
 
-export const Item = model<IItem>("Item", itemSchema);
+export const Item = model<IItem>("items", itemSchema);
