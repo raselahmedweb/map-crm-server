@@ -1,5 +1,5 @@
 import z from "zod";
-import { IsActive, Role } from "./user.interface";
+import { Role } from "./user.interface";
 
 export const createUserZodSchema = z.object({
   name: z
@@ -23,17 +23,6 @@ export const createUserZodSchema = z.object({
     .regex(/^(?=.*\d)/, {
       message: "Password must contain at least 1 number.",
     }),
-  phone: z
-    .string({ invalid_type_error: "Phone must be string" })
-    .regex(/^(?:\+8801\d{9}|01\d{9})$/, {
-      message:
-        "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
-    })
-    .optional(),
-  address: z
-    .string({ invalid_type_error: "Address must be string" })
-    .max(200, { message: "Address cannot exceed 200 characters" })
-    .optional(),
 });
 export const updateUserZodSchema = z.object({
   name: z
@@ -54,19 +43,7 @@ export const updateUserZodSchema = z.object({
       message: "Password must contain at least 1 number.",
     })
     .optional(),
-  phone: z
-    .string({ invalid_type_error: "Phone must be string" })
-    .regex(/^(?:\+8801\d{9}|01\d{9})$/, {
-      message:
-        "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
-    })
-    .optional(),
-  address: z
-    .string({ invalid_type_error: "Address must be string" })
-    .max(200, { message: "Address cannot exceed 200 characters" })
-    .optional(),
   role: z.enum(Object.values(Role) as [string]).optional(),
-  isActive: z.enum(Object.values(IsActive) as [string]).optional(),
   isDeleted: z
     .boolean({ invalid_type_error: "isDeleted must be true or false" })
     .optional(),

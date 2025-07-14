@@ -13,7 +13,7 @@ app.use("/api/v1", router);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({
-    message: "Welcome to the Tour Management System API",
+    message: "Welcome to the Map Planner CRM System Server",
   });
 });
 

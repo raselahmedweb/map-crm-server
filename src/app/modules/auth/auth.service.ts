@@ -1,5 +1,5 @@
 import AppError from "../../errorHelpers/AppError";
-import { IsActive, IUser } from "../user/user.interface";
+import { IUser } from "../user/user.interface";
 import { User } from "../user/user.model";
 import httpStatusCode from "http-status-codes";
 import bcryptjs from "bcryptjs";
@@ -47,16 +47,6 @@ const getNewAccessToken = async (refreshToken: string) => {
 
   if (!isExistUser) {
     throw new AppError(httpStatusCode.NOT_FOUND, "Email does not exist");
-  }
-
-  if (
-    isExistUser.isActive === IsActive.BLOCKED ||
-    isExistUser.isActive === IsActive.INACTIVE
-  ) {
-    throw new AppError(
-      httpStatusCode.FORBIDDEN,
-      `User is ${isExistUser.isActive}`
-    );
   }
 
   if (isExistUser.isDeleted) {

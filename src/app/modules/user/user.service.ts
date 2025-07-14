@@ -38,14 +38,7 @@ const updateUser = async (
   }
 
   if (payload.role) {
-    if (decodedToken.role === Role.USER || decodedToken.role === Role.GUIDE) {
-      throw new AppError(
-        httpStatusCode.FORBIDDEN,
-        "You are not authrized for tjis changes"
-      );
-    }
-
-    if (payload.role === Role.SUPER_ADMIN && decodedToken.role === Role.ADMIN) {
+    if (decodedToken.role !== Role.ADMIN) {
       throw new AppError(
         httpStatusCode.FORBIDDEN,
         "You are not authrized for tjis changes"
@@ -53,11 +46,11 @@ const updateUser = async (
     }
   }
 
-  if (payload.isActive || payload.isDeleted || payload.isVerified) {
-    if (decodedToken.role === Role.GUIDE || decodedToken.role === Role.GUIDE) {
+  if (payload.isDeleted || payload.isVerified) {
+    if (decodedToken.role !== Role.ADMIN) {
       throw new AppError(
         httpStatusCode.FORBIDDEN,
-        "You are not authrized for tjis changes"
+        "You are not authrized for this changes"
       );
     }
   }
