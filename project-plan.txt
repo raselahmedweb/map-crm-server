@@ -1,0 +1,9 @@
+# Actions
+1. Client contact or contacted
+2. Sales Appointment is for Sales Specialist or Sales Technician to go on site for survey the job.
+3. Customer provides FLOOR PLAN to the Sales man.
+4. Sales Specialist or Sales Technician upload the plan with floor, description, details of customer.
+5. From sales specialist report Project Designer or Collaborator will create project map with require devices and items.
+6. Projects will be assigned to TECHNICIAN or INSTALLERS by Admin.
+7. TECHNICIAN or INSTALLERS can updates progress of each items and can note information.
+8. Customer can access their projects with information like progres, quote and invoice. but they can not edit.

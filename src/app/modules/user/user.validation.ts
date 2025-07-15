@@ -1,5 +1,4 @@
 import z from "zod";
-import { Role } from "./user.interface";
 
 export const createUserZodSchema = z.object({
   name: z
@@ -23,6 +22,13 @@ export const createUserZodSchema = z.object({
     .regex(/^(?=.*\d)/, {
       message: "Password must contain at least 1 number.",
     }),
+  picture: z
+    .string({ invalid_type_error: "Image url must be string" })
+    .optional(),
+  role: z.string({ invalid_type_error: "Role must be string" }).optional(),
+  companyId: z
+    .string({ invalid_type_error: "Company id must be string" })
+    .optional(),
 });
 export const updateUserZodSchema = z.object({
   name: z
@@ -43,7 +49,13 @@ export const updateUserZodSchema = z.object({
       message: "Password must contain at least 1 number.",
     })
     .optional(),
-  role: z.enum(Object.values(Role) as [string]).optional(),
+  picture: z
+    .string({ invalid_type_error: "Image url must be string" })
+    .optional(),
+  role: z.string({ invalid_type_error: "Role must be string" }).optional(),
+  companyId: z
+    .string({ invalid_type_error: "Company id must be string" })
+    .optional(),
   isDeleted: z
     .boolean({ invalid_type_error: "isDeleted must be true or false" })
     .optional(),
