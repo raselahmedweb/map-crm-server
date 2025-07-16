@@ -28,10 +28,6 @@ const userSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "company",

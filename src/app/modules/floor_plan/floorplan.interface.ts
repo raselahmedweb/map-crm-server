@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 
 export interface IFloorPlan {
   _id?: Types.ObjectId;
+  userId: Types.ObjectId;
   companyId?: Types.ObjectId; // if company exist
   imageUrl: string[];
   description: string;

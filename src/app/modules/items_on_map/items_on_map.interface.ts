@@ -5,9 +5,9 @@ export interface IItemsOnMap {
   itemId: Types.ObjectId;
   mapId: Types.ObjectId;
   userId: Types.ObjectId;
-  description: string;
-  domElementId?: string;
-  isFinished: boolean;
+  location?: string;
+  progress?: number;
+  notes?: string;
   x: number;
   y: number;
 }

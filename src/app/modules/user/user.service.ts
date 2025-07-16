@@ -46,7 +46,7 @@ const updateUser = async (
     }
   }
 
-  if (payload.isDeleted || payload.isVerified) {
+  if (payload.isDeleted) {
     if (decodedToken.role !== Role.ADMIN) {
       throw new AppError(
         httpStatusCode.FORBIDDEN,
