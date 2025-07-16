@@ -23,7 +23,9 @@ const createUser = async (payload: Partial<IUser>) => {
     password: hashPassword,
     ...rest,
   });
-  return user;
+  const userObj = user.toObject() as Partial<IUser>;
+  delete userObj.password;
+  return userObj;
 };
 
 const updateUser = async (
@@ -41,7 +43,7 @@ const updateUser = async (
     if (decodedToken.role !== Role.ADMIN) {
       throw new AppError(
         httpStatusCode.FORBIDDEN,
-        "You are not authrized for tjis changes"
+        "You are not authrized for this changes"
       );
     }
   }
@@ -65,14 +67,15 @@ const updateUser = async (
   const newUpdateUser = await User.findByIdAndUpdate(userId, payload, {
     new: true,
     runValidators: true,
-  });
+  }).select("-password");
 
   return newUpdateUser;
 };
 
 const getAllUsers = async () => {
-  const users = await User.find({});
+  const users = await User.find({}).select("-password");
   const total = await User.countDocuments();
+
   return { users, total };
 };
 

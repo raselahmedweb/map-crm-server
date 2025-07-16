@@ -3,8 +3,8 @@ import { Types } from "mongoose";
 export enum Role {
   ADMIN = "ADMIN",
   ASSISTANT = "ASSISTANT",
-  SALSE_TECHNICIAN = "SALSE_TECHNICIAN",
-  SALSE_SPECIALIST = "SALSE_SPECIALIST",
+  SALES_TECHNICIAN = "SALES_TECHNICIAN",
+  SALES_SPECIALIST = "SALES_SPECIALIST",
   PROJECT_DESIGNER = "PROJECT_DESIGNER",
   COLLABORATOR = "COLLABORATOR",
   INSTALLER = "INSTALLER",
@@ -20,5 +20,5 @@ export interface IUser {
   picture?: string;
   isDeleted: boolean;
   role: Role;
-  companyId?: Types.ObjectId;
+  companyId: Types.ObjectId;
 }

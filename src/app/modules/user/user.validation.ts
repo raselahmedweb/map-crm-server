@@ -26,9 +26,7 @@ export const createUserZodSchema = z.object({
     .string({ invalid_type_error: "Image url must be string" })
     .optional(),
   role: z.string({ invalid_type_error: "Role must be string" }).optional(),
-  companyId: z
-    .string({ invalid_type_error: "Company id must be string" })
-    .optional(),
+  companyId: z.string({ invalid_type_error: "Company id must be string" }),
 });
 export const updateUserZodSchema = z.object({
   name: z
@@ -62,4 +60,23 @@ export const updateUserZodSchema = z.object({
   isVerified: z
     .boolean({ invalid_type_error: "isVerified must be true or false" })
     .optional(),
+});
+
+export const resetPasswordZodSchema = z.object({
+  oldPassword: z.string(),
+  newPassword: z
+    .string({ invalid_type_error: "Password must be string" })
+    .min(8, { message: "Password must be at least 8 characters long" })
+    .regex(/^(?=.*[A-Z])/, {
+      message: "Password must contain at least 1 uppercase letter.",
+    })
+    .regex(/^(?=.*[a-z])/, {
+      message: "Password must contain at least 1 lowercase letter.",
+    })
+    .regex(/^(?=.*[!@#$%^&*])/, {
+      message: "Password must contain at least 1 special character.",
+    })
+    .regex(/^(?=.*\d)/, {
+      message: "Password must contain at least 1 number.",
+    }),
 });

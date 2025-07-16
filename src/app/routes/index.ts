@@ -2,6 +2,9 @@ import { Router } from "express";
 import { UserRoutes } from "../modules/user/user.route";
 import { AuthRoutes } from "../modules/auth/auth.route";
 import { CompanyRoutes } from "../modules/company/company.route";
+import { SalesAppointmentRoutes } from "../modules/sales_appointment/sales_appointment.route";
+import { FloorPlanRoutes } from "../modules/floor_plan/floorplan.route";
+import { MapRoutes } from "../modules/map/map.route";
 
 export const router = Router();
 
@@ -17,6 +20,18 @@ const moduleRoutes = [
   {
     path: "/company",
     route: CompanyRoutes,
+  },
+  {
+    path: "/sales-appointment",
+    route: SalesAppointmentRoutes,
+  },
+  {
+    path: "/floorplan",
+    route: FloorPlanRoutes,
+  },
+  {
+    path: "/map",
+    route: MapRoutes,
   },
 ];
 

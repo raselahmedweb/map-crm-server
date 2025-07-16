@@ -3,4 +3,6 @@ export interface ICompany {
   name: string;
   email?: string;
   website?: string;
+  logo?: string;
+  isDeleted: boolean;
 }

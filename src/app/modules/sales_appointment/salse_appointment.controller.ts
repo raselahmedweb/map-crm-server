@@ -2,72 +2,69 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
-import { CompanyServices } from "./company.service";
+import { SalesAppointmentServices } from "./sales_appointment.service";
 
-const createCompany = catchAsync(
+const createSalesAppointment = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const company = await CompanyServices.createCompany(req.body);
+    const appointment = await SalesAppointmentServices.createSalesAppointment(
+      req.body
+    );
     sendResponse(res, {
       statusCode: httpStatusCode.CREATED,
       success: true,
-      message: "Company created successfully",
-      data: company,
+      message: "Appointment scheduled successfully",
+      data: appointment,
     });
   }
 );
 
-const updateCompany = catchAsync(
+const getAllAppointment = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const companyId = req.params.id;
-    const payload = req.body;
-    const decodedToken = req.user;
-    const company = await CompanyServices.updateCompany(
-      companyId,
-      payload,
-      decodedToken
+    const appointment = await SalesAppointmentServices.getAllAppointment();
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "All appointment retrieved successfully",
+      data: appointment,
+    });
+  }
+);
+
+const getAppointmentByUserId = catchAsync(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    const appointment = await SalesAppointmentServices.getAppointmentByUserId(
+      userId
     );
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Company updated successfully",
-      data: company,
+      message: "Appointment retrieved successfully",
+      data: appointment,
     });
   }
 );
 
-const getCompany = catchAsync(
+const deleteAppointment = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const company = await CompanyServices.getCompany();
+    const appointmentId = req.params.id;
+    await SalesAppointmentServices.deleteAppointment(appointmentId);
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Company retrieved successfully",
-      data: company,
-    });
-  }
-);
-
-const deleteCompany = catchAsync(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async (req: Request, res: Response, next: NextFunction) => {
-    const companyId = req.params.id;
-    const decodedToken = req.user;
-    await CompanyServices.deleteCompany(companyId, decodedToken);
-    sendResponse(res, {
-      statusCode: httpStatusCode.OK,
-      success: true,
-      message: "Company deleted successfully",
+      message: "Appointment deleted successfully",
       data: null,
     });
   }
 );
 
-export const CompanyControllers = {
-  createCompany,
-  updateCompany,
-  getCompany,
-  deleteCompany,
+export const SalesAppointmentControllers = {
+  createSalesAppointment,
+  getAllAppointment,
+  getAppointmentByUserId,
+  deleteAppointment,
 };

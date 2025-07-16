@@ -12,6 +12,11 @@ const companySchema = new Schema<ICompany>(
       unique: true,
     },
     website: { type: String },
+    logo: { type: String },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { versionKey: false, timestamps: true }
 );

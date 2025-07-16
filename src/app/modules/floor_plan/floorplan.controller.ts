@@ -2,72 +2,69 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
-import { CompanyServices } from "./company.service";
+import { FloorplanServices } from "./floorplan.service";
 
-const createCompany = catchAsync(
+const createFloorplan = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const company = await CompanyServices.createCompany(req.body);
+    const floorplan = await FloorplanServices.createFloorplan(req.body);
     sendResponse(res, {
       statusCode: httpStatusCode.CREATED,
       success: true,
-      message: "Company created successfully",
-      data: company,
+      message: "Floorplan scheduled successfully",
+      data: floorplan,
     });
   }
 );
 
-const updateCompany = catchAsync(
+const updateFloorplan = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const companyId = req.params.id;
+    const floorplanId = req.params.id;
     const payload = req.body;
-    const decodedToken = req.user;
-    const company = await CompanyServices.updateCompany(
-      companyId,
-      payload,
-      decodedToken
+    const floorplan = await FloorplanServices.updateFloorplan(
+      floorplanId,
+      payload
     );
     sendResponse(res, {
-      statusCode: httpStatusCode.OK,
+      statusCode: httpStatusCode.CREATED,
       success: true,
-      message: "Company updated successfully",
-      data: company,
+      message: "Floorplan updated successfully",
+      data: floorplan,
     });
   }
 );
 
-const getCompany = catchAsync(
+const getAllFloorplan = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const company = await CompanyServices.getCompany();
+    const floorplan = await FloorplanServices.getAllFloorplan();
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Company retrieved successfully",
-      data: company,
+      message: "All floorplan retrieved successfully",
+      data: floorplan,
     });
   }
 );
 
-const deleteCompany = catchAsync(
+const deleteFloorplan = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const companyId = req.params.id;
-    const decodedToken = req.user;
-    await CompanyServices.deleteCompany(companyId, decodedToken);
+    const floorplanId = req.params.id;
+    await FloorplanServices.deleteFloorplan(floorplanId);
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Company deleted successfully",
+      message: "Floorplan deleted successfully",
       data: null,
     });
   }
 );
 
-export const CompanyControllers = {
-  createCompany,
-  updateCompany,
-  getCompany,
-  deleteCompany,
+export const FloorplanControllers = {
+  createFloorplan,
+  updateFloorplan,
+  getAllFloorplan,
+  deleteFloorplan,
 };

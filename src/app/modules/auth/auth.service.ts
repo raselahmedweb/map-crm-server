@@ -15,14 +15,13 @@ const credentialsLogin = async (payload: Partial<IUser>) => {
   const { email, password } = payload;
 
   const isExistUser = await User.findOne({ email });
-
   if (!isExistUser) {
     throw new AppError(httpStatusCode.BAD_REQUEST, "Email does not exist");
   }
 
   const isPasswordMatched = await bcryptjs.compare(
     password as string,
-    isExistUser.password as string
+    isExistUser.password
   );
 
   if (!isPasswordMatched) {

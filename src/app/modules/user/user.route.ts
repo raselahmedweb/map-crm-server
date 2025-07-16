@@ -14,10 +14,16 @@ router.post(
 );
 router.patch(
   "/:id",
-  validateRequest(updateUserZodSchema),
   checkAuth(...Object.values(Role)),
+  validateRequest(updateUserZodSchema),
   UserControllers.updateUser
 );
-router.get("/all-users", checkAuth(Role.ADMIN), UserControllers.getAllUsers);
+router.get(
+  "/all-users",
+  checkAuth(
+    Role.ADMIN || Role.ASSISTANT || Role.PROJECT_DESIGNER || Role.COLLABORATOR
+  ),
+  UserControllers.getAllUsers
+);
 
 export const UserRoutes = router;

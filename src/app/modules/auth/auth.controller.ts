@@ -6,7 +6,6 @@ import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
 import AppError from "../../errorHelpers/AppError";
 import { setCookie } from "../../utils/setCookie";
-import z from "zod";
 
 const credentialsLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
