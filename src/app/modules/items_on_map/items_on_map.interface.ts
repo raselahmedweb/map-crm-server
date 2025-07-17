@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
 
-export interface IItemsOnMap {
+export interface IItemOnMap {
   _id?: string;
   itemId: Types.ObjectId;
   mapId: Types.ObjectId;

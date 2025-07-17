@@ -25,8 +25,6 @@ export const createUserZodSchema = z.object({
   picture: z
     .string({ invalid_type_error: "Image url must be string" })
     .optional(),
-  role: z.string({ invalid_type_error: "Role must be string" }).optional(),
-  companyId: z.string({ invalid_type_error: "Company id must be string" }),
 });
 export const updateUserZodSchema = z.object({
   name: z
@@ -50,6 +48,8 @@ export const updateUserZodSchema = z.object({
   picture: z
     .string({ invalid_type_error: "Image url must be string" })
     .optional(),
+});
+export const updateUserByAdminZodSchema = z.object({
   role: z.string({ invalid_type_error: "Role must be string" }).optional(),
   companyId: z
     .string({ invalid_type_error: "Company id must be string" })

@@ -4,13 +4,15 @@ import httpStatus from "http-status-codes";
 import { UserServices } from "./user.service";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
-import { verifyToken } from "../../utils/jwt";
-import { envVars } from "../../config/env";
-import { JwtPayload } from "jsonwebtoken";
+import AppError from "../../errorHelpers/AppError";
 
 const createUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await UserServices.createUser(req.body);
+    const inviteToken = req.headers.authorization;
+    if (!inviteToken) {
+      throw new AppError(httpStatus.NOT_FOUND, "Invitation token not found.");
+    }
+    const user = await UserServices.createUser(req.body, inviteToken);
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,
@@ -23,9 +25,8 @@ const createUser = catchAsync(
 const updateUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    const verifiedToken = req.user;
     const payload = req.body;
-    const user = await UserServices.updateUser(userId, payload, verifiedToken);
+    const user = await UserServices.updateUser(userId, payload);
     sendResponse(res, {
       statusCode: httpStatus.CREATED,
       success: true,

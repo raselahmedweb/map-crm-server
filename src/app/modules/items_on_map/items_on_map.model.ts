@@ -1,7 +1,7 @@
 import mongoose, { model, Schema } from "mongoose";
-import { IItemsOnMap } from "./items_on_map.interface";
+import { IItemOnMap } from "./items_on_map.interface";
 
-const itemsOnMapSchema = new Schema<IItemsOnMap>(
+const itemOnMapSchema = new Schema<IItemOnMap>(
   {
     itemId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -24,9 +24,11 @@ const itemsOnMapSchema = new Schema<IItemsOnMap>(
     progress: {
       type: Number,
     },
-    notes: {
-      type: Number,
-    },
+    notes: [
+      {
+        type: String,
+      },
+    ],
     x: {
       type: Number,
       required: true,
@@ -39,4 +41,4 @@ const itemsOnMapSchema = new Schema<IItemsOnMap>(
   { timestamps: true, versionKey: false }
 );
 
-export const ItemsOnMap = model<IItemsOnMap>("itemsonmaps", itemsOnMapSchema);
+export const ItemOnMap = model<IItemOnMap>("itemonmap", itemOnMapSchema);

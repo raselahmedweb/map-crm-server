@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { UserControllers } from "./user.controller";
-import { createUserZodSchema, updateUserZodSchema } from "./user.validation";
+import {
+  createUserZodSchema,
+  updateUserByAdminZodSchema,
+  updateUserZodSchema,
+} from "./user.validation";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { Role } from "./user.interface";
 import { checkAuth } from "../../middlewares/checkAuth";
@@ -16,6 +20,12 @@ router.patch(
   "/:id",
   checkAuth(...Object.values(Role)),
   validateRequest(updateUserZodSchema),
+  UserControllers.updateUser
+);
+router.patch(
+  "/by-admin/:id",
+  checkAuth(Role.ADMIN, Role.ASSISTANT),
+  validateRequest(updateUserByAdminZodSchema),
   UserControllers.updateUser
 );
 router.get(

@@ -5,6 +5,8 @@ import { CompanyRoutes } from "../modules/company/company.route";
 import { SalesAppointmentRoutes } from "../modules/sales_appointment/sales_appointment.route";
 import { FloorPlanRoutes } from "../modules/floor_plan/floorplan.route";
 import { MapRoutes } from "../modules/map/map.route";
+import { ItemRoutes } from "../modules/items/item.route";
+import { InviteUserRoutes } from "../modules/invitation/invitation.route";
 
 export const router = Router();
 
@@ -32,6 +34,14 @@ const moduleRoutes = [
   {
     path: "/map",
     route: MapRoutes,
+  },
+  {
+    path: "/item",
+    route: ItemRoutes,
+  },
+  {
+    path: "/invite-user",
+    route: InviteUserRoutes,
   },
 ];
 
