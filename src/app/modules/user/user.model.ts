@@ -31,7 +31,6 @@ const userSchema = new Schema<IUser>(
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "company",
-      required: true,
     },
   },
   {

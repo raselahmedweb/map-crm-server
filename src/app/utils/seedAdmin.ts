@@ -26,7 +26,6 @@ export const seedAdmin = async () => {
       role: Role.ADMIN,
       email: envVars.ADMIN_EMAIL,
       password: hashedPassword,
-      isVerified: true,
     };
 
     const admin = await User.create(payload);

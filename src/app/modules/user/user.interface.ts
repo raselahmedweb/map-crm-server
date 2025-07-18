@@ -18,7 +18,7 @@ export interface IUser {
   email: string;
   password: string;
   picture?: string;
-  isDeleted: boolean;
+  isDeleted?: boolean;
   role: Role;
-  companyId: Types.ObjectId;
+  companyId?: Types.ObjectId;
 }
