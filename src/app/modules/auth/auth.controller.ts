@@ -20,6 +20,18 @@ const credentialsLogin = catchAsync(
   }
 );
 
+const me = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "User retrive successfully",
+      data: req.user,
+    });
+  }
+);
+
 const getNewAccessToken = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const refresToken = req.cookies.refreshToken;
@@ -88,6 +100,7 @@ const resetPassword = catchAsync(
 
 export const AuthControllers = {
   credentialsLogin,
+  me,
   getNewAccessToken,
   logout,
   resetPassword,

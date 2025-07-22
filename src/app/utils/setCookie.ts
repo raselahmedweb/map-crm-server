@@ -10,14 +10,14 @@ export const setCookie = async (res: Response, authToken: IAuthToken) => {
     res.cookie("accessToken", authToken.accessToken, {
       httpOnly: true,
       secure: false,
-      // sameSite: "lax",
+      sameSite: "lax",
     });
   }
   if (authToken.refreshToken) {
     res.cookie("refreshToken", authToken.refreshToken, {
       httpOnly: true,
       secure: false,
-      // sameSite: "lax",
+      sameSite: "lax",
     });
   }
 };

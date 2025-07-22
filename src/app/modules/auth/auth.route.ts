@@ -8,6 +8,7 @@ import { resetPasswordZodSchema } from "../user/user.validation";
 const route = Router();
 
 route.post("/login", AuthControllers.credentialsLogin);
+route.get("/me", checkAuth(...Object.values(Role)), AuthControllers.me);
 route.post("/refresh-token", AuthControllers.getNewAccessToken);
 route.post("/logout", AuthControllers.logout);
 route.post(
