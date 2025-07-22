@@ -5,17 +5,19 @@ export interface IAuthToken {
   refreshToken?: string;
 }
 
-export const setCookie = (res: Response, authToken: IAuthToken) => {
+export const setCookie = async (res: Response, authToken: IAuthToken) => {
   if (authToken.accessToken) {
     res.cookie("accessToken", authToken.accessToken, {
       httpOnly: true,
       secure: false,
+      // sameSite: "lax",
     });
   }
   if (authToken.refreshToken) {
     res.cookie("refreshToken", authToken.refreshToken, {
       httpOnly: true,
       secure: false,
+      // sameSite: "lax",
     });
   }
 };
