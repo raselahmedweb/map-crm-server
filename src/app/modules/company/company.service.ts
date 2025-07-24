@@ -6,16 +6,7 @@ import httpStatusCode from "http-status-codes";
 import { Role } from "../user/user.interface";
 
 const createCompany = async (payload: Partial<ICompany>) => {
-  const { email, ...rest } = payload;
-  const existingCompany = await Company.findOne({ email });
-  if (existingCompany) {
-    throw new AppError(httpStatusCode.BAD_REQUEST, "Company already exists");
-  }
-
-  const company = await Company.create({
-    email,
-    ...rest,
-  });
+  const company = await Company.create(payload);
   return company;
 };
 

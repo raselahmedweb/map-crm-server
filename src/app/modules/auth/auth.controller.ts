@@ -6,6 +6,7 @@ import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
 import AppError from "../../errorHelpers/AppError";
 import { setCookie } from "../../utils/setCookie";
+import { User } from "../user/user.model";
 
 const credentialsLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -22,12 +23,14 @@ const credentialsLogin = catchAsync(
 
 const me = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req);
+    const { userId } = req.user;
+    const user = await User.findById(userId).select("-password");
+
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
       message: "User retrive successfully",
-      data: req.user,
+      data: user,
     });
   }
 );

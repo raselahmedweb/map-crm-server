@@ -9,7 +9,6 @@ const companySchema = new Schema<ICompany>(
     },
     email: {
       type: String,
-      unique: true,
     },
     website: { type: String },
     logo: { type: String },
