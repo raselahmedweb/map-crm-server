@@ -7,7 +7,6 @@ import { FloorPlanRoutes } from "../modules/floor_plan/floorplan.route";
 import { MapRoutes } from "../modules/map/map.route";
 import { ItemRoutes } from "../modules/items/item.route";
 import { InviteUserRoutes } from "../modules/invitation/invitation.route";
-import { WhatsappRemindersRoutes } from "../modules/whatsapp-reminder/whatsapp-reminder.route";
 
 export const router = Router();
 
@@ -43,10 +42,6 @@ const moduleRoutes = [
   {
     path: "/invite-user",
     route: InviteUserRoutes,
-  },
-  {
-    path: "/whatsapp",
-    route: WhatsappRemindersRoutes,
   },
 ];
 
