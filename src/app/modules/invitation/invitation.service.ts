@@ -35,7 +35,7 @@ const inviteUserToCreateProfile = async (payload: Partial<IUser>) => {
     envVars.JWT_INVITATION_EXPIRES
   );
   // Send invitation
-  const inviteUrl = `${envVars.FRONTEND_URL}/register?invitationToken=${inviteToken}`;
+  const inviteUrl = `http://localhost:5174/register?invitationToken=${inviteToken}`;
   await transporter.sendMail({
     from: `Invitation link to create account in GEEKSBLOCK <${envVars.NODEMAILER_EMAIL}>`,
     to: email,
