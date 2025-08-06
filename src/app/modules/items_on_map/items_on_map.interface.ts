@@ -5,9 +5,13 @@ export interface IItemOnMap {
   itemId: Types.ObjectId;
   mapId: Types.ObjectId;
   userId: Types.ObjectId;
-  location?: string;
+  salePrice?: number;
   progress?: number;
   notes?: string;
+  serial?: string;
+  mac?: string;
+  model?: string;
+  location?: string;
   x: number;
   y: number;
 }

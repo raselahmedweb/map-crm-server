@@ -2,79 +2,81 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
-import { ItemServices } from "./item.service";
+import { ProjectsServices } from "./projects.service";
 
-const createItem = catchAsync(
+const createProjects = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const item = await ItemServices.createItem(req.body);
+    const projects = await ProjectsServices.createProjects(req.body);
     sendResponse(res, {
       statusCode: httpStatusCode.CREATED,
       success: true,
-      message: "Item created successfully",
-      data: item,
+      message: "Projects scheduled successfully",
+      data: projects,
     });
   }
 );
 
-const updateItem = catchAsync(
+const updateProjects = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const itemId = req.params.id;
+    const ProjectsId = req.params.id;
     const payload = req.body;
-    const item = await ItemServices.updateItem(itemId, payload);
+    const projects = await ProjectsServices.updateProjects(ProjectsId, payload);
     sendResponse(res, {
       statusCode: httpStatusCode.CREATED,
       success: true,
-      message: "Item updated successfully",
-      data: item,
+      message: "Projects updated successfully",
+      data: projects,
     });
   }
 );
 
-const getAllItem = catchAsync(
+const getAllProjects = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const item = await ItemServices.getAllItem();
+    const projects = await ProjectsServices.getAllProjects();
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "All Item retrieved successfully",
-      data: item,
-    });
-  }
-);
-const getAllItemWithoutPrice = catchAsync(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async (req: Request, res: Response, next: NextFunction) => {
-    const item = await ItemServices.getAllItemWithoutPrice();
-    sendResponse(res, {
-      statusCode: httpStatusCode.OK,
-      success: true,
-      message: "All Item retrieved successfully",
-      data: item,
+      message: "All Projects retrieved successfully",
+      data: projects,
     });
   }
 );
 
-const deleteItem = catchAsync(
+const getProject = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const itemId = req.params.id;
-    await ItemServices.deleteItem(itemId);
+    const projectId = req.params.id;
+    const project = await ProjectsServices.getProject(projectId);
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Item deleted successfully",
+      message: "Project retrieved successfully",
+      data: project,
+    });
+  }
+);
+
+const deleteProjects = catchAsync(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (req: Request, res: Response, next: NextFunction) => {
+    const ProjectsId = req.params.id;
+    await ProjectsServices.deleteProjects(ProjectsId);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "Projects deleted successfully",
       data: null,
     });
   }
 );
 
-export const ItemControllers = {
-  createItem,
-  updateItem,
-  getAllItem,
-  getAllItemWithoutPrice,
-  deleteItem,
+export const ProjectsControllers = {
+  createProjects,
+  updateProjects,
+  getAllProjects,
+  getProject,
+  deleteProjects,
 };

@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
-import { IFloorPlan } from "./floorplan.interface";
+import { IProjects } from "./projects.interface";
 
-const floorPlanSchema = new Schema<IFloorPlan>(
+const projectsSchema = new Schema<IProjects>(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -10,20 +10,21 @@ const floorPlanSchema = new Schema<IFloorPlan>(
     },
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "company",
+      ref: "companies",
     },
     imageUrl: {
       type: [String],
       required: true,
     },
-    description: {
+    name: {
       type: String,
       required: true,
     },
-    companyInfo: {
-      type: String,
-    },
     isMapCreated: {
+      type: Boolean,
+      default: false,
+    },
+    isDeleted: {
       type: Boolean,
       default: false,
     },
@@ -34,4 +35,4 @@ const floorPlanSchema = new Schema<IFloorPlan>(
   }
 );
 
-export const FloorPlan = model<IFloorPlan>("floorplans", floorPlanSchema);
+export const Projects = model<IProjects>("projects", projectsSchema);

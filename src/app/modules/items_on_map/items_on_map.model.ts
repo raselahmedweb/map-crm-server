@@ -21,6 +21,9 @@ const itemOnMapSchema = new Schema<IItemOnMap>(
     location: {
       type: String,
     },
+    salePrice: {
+      type: Number,
+    },
     progress: {
       type: Number,
     },

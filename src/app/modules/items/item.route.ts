@@ -10,15 +10,28 @@ const router = Router();
 // Only ADMIN, ASSISTANT, COLLABORATOR, PROJECT_DESIGNER can create floor plan
 router.post(
   "/create",
-  checkAuth(Role.ADMIN, Role.ASSISTANT),
+  checkAuth(Role.ADMIN),
   validateRequest(createItemZodSchema),
   ItemControllers.createItem
 );
-// ADMIN, ASSISTANT can get all Item
+
 router.get(
-  "/all-Items",
-  checkAuth(Role.ADMIN, Role.ASSISTANT),
+  "/all-items-with-details",
+  checkAuth(Role.ADMIN),
   ItemControllers.getAllItem
+);
+
+router.get(
+  "/all-items",
+  checkAuth(
+    Role.ADMIN,
+    Role.ASSISTANT,
+    Role.COLLABORATOR,
+    Role.PROJECT_DESIGNER,
+    Role.SALES_SPECIALIST,
+    Role.SALES_TECHNICIAN
+  ),
+  ItemControllers.getAllItemWithoutPrice
 );
 
 // ADMIN, ASSISTANT can update

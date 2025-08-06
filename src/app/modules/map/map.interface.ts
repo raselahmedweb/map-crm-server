@@ -2,10 +2,12 @@ import { Types } from "mongoose";
 
 export interface IMap {
   _id?: Types.ObjectId;
+  name: string;
   companyId: Types.ObjectId;
-  projectDesigner: Types.ObjectId;
+  mapDesigner: Types.ObjectId;
   assignedTo: Types.ObjectId[];
-  bgImageUrl: string[];
+  bgImageUrl: string;
+  availableDevices: Types.ObjectId[];
   isComplete: boolean;
   customerNotes?: string;
 }

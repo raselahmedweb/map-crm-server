@@ -20,6 +20,10 @@ export const createItemOnMapZodSchema = z.object({
       message: "Invalid User ID format",
     }),
 
+  salePrice: z
+    .number({ invalid_type_error: "Sale price must be a number" })
+    .optional(),
+
   location: z
     .string({ invalid_type_error: "Location must be a string" })
     .optional(),

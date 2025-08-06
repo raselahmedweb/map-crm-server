@@ -24,8 +24,16 @@ const updateMap = async (mapId: string, payload: Partial<IMap>) => {
 };
 
 const getAllMap = async () => {
-  const map = await Map.find({});
-  const total = await Map.countDocuments();
+  const [map, total] = await Promise.all([
+    Map.find({})
+      .populate("companyId", "name")
+      .populate("mapDesigner", "name email")
+      .populate("assignedTo", "name email")
+      .populate("availableDevices", "label shape price")
+      .lean(),
+    Map.countDocuments(),
+  ]);
+
   return { map, total };
 };
 

@@ -3,7 +3,7 @@ import { UserRoutes } from "../modules/user/user.route";
 import { AuthRoutes } from "../modules/auth/auth.route";
 import { CompanyRoutes } from "../modules/company/company.route";
 import { SalesAppointmentRoutes } from "../modules/sales_appointment/sales_appointment.route";
-import { FloorPlanRoutes } from "../modules/floor_plan/floorplan.route";
+import { ProjectsRoutes } from "../modules/projects/projects.route";
 import { MapRoutes } from "../modules/map/map.route";
 import { ItemRoutes } from "../modules/items/item.route";
 import { InviteUserRoutes } from "../modules/invitation/invitation.route";
@@ -28,8 +28,8 @@ const moduleRoutes = [
     route: SalesAppointmentRoutes,
   },
   {
-    path: "/floorplan",
-    route: FloorPlanRoutes,
+    path: "/projects",
+    route: ProjectsRoutes,
   },
   {
     path: "/map",

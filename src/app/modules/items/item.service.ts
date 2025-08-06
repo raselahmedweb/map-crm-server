@@ -28,6 +28,11 @@ const getAllItem = async () => {
   const total = await Item.countDocuments();
   return { item, total };
 };
+const getAllItemWithoutPrice = async () => {
+  const item = await Item.find({}).select("-price");
+  const total = await Item.countDocuments();
+  return { item, total };
+};
 
 const deleteItem = async (itemId: string) => {
   const ifItemExist = await Item.findById(itemId);
@@ -43,5 +48,6 @@ export const ItemServices = {
   createItem,
   updateItem,
   getAllItem,
+  getAllItemWithoutPrice,
   deleteItem,
 };

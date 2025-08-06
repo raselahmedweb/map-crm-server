@@ -2,6 +2,6 @@ export interface IItem {
   _id?: string;
   label: string;
   shape: string;
-  installationCost: number;
+  price: number;
   copies: number;
 }

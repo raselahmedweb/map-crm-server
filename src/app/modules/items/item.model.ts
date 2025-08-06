@@ -11,7 +11,7 @@ const itemSchema = new Schema<IItem>(
       type: String,
       required: true,
     },
-    installationCost: {
+    price: {
       type: Number,
       required: true,
     },

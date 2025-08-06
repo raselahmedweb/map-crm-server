@@ -3,12 +3,16 @@ import { IMap } from "./map.interface";
 
 const mapSchema = new Schema<IMap>(
   {
-    companyId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "company",
+    name: {
+      type: String,
       required: true,
     },
-    projectDesigner: {
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "companies",
+      required: true,
+    },
+    mapDesigner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
       required: true,
@@ -21,7 +25,16 @@ const mapSchema = new Schema<IMap>(
       },
     ],
     bgImageUrl: {
-      type: [String],
+      type: String,
+      required: true,
+    },
+    availableDevices: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "items",
+        },
+      ],
       required: true,
     },
     isComplete: {
