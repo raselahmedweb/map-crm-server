@@ -59,6 +59,20 @@ const getMapByAssignedId = catchAsync(
   }
 );
 
+const getMapById = catchAsync(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (req: Request, res: Response, next: NextFunction) => {
+    const assignedUserId = req.params.id;
+    const map = await MapServices.getMapById(assignedUserId);
+    sendResponse(res, {
+      statusCode: httpStatusCode.OK,
+      success: true,
+      message: "Map retrieved successfully",
+      data: map,
+    });
+  }
+);
+
 const deleteMap = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
@@ -78,5 +92,6 @@ export const MapControllers = {
   updateMap,
   getAllMap,
   getMapByAssignedId,
+  getMapById,
   deleteMap,
 };

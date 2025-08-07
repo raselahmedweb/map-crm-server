@@ -25,6 +25,23 @@ const updateItemOnMap = async (
 
   return newItemOnMap;
 };
+const changePosition = async (
+  itemOnMapId: string,
+  payload: Partial<IItemOnMap>
+) => {
+  const ifItemOnMapExist = await ItemOnMap.findById(itemOnMapId);
+
+  if (!ifItemOnMapExist) {
+    throw new AppError(httpStatusCode.NOT_FOUND, "ItemOnMap does not exist");
+  }
+
+  const newItemOnMap = await ItemOnMap.findByIdAndUpdate(itemOnMapId, payload, {
+    new: true,
+    runValidators: true,
+  });
+
+  return newItemOnMap;
+};
 
 const getAllItemOnMap = async (mapId: string) => {
   const itemOnMap = await ItemOnMap.find({ mapId });
@@ -47,4 +64,5 @@ export const ItemOnMapServices = {
   updateItemOnMap,
   getAllItemOnMap,
   deleteItemOnMap,
+  changePosition,
 };

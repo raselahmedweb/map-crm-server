@@ -41,6 +41,10 @@ const mapSchema = new Schema<IMap>(
       type: Boolean,
       default: false,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
     customerNotes: {
       type: String,
     },

@@ -7,6 +7,7 @@ import { ProjectsRoutes } from "../modules/projects/projects.route";
 import { MapRoutes } from "../modules/map/map.route";
 import { ItemRoutes } from "../modules/items/item.route";
 import { InviteUserRoutes } from "../modules/invitation/invitation.route";
+import { ItemOnMapRoutes } from "../modules/items_on_map/items_on_map.route";
 
 export const router = Router();
 
@@ -42,6 +43,10 @@ const moduleRoutes = [
   {
     path: "/invite-user",
     route: InviteUserRoutes,
+  },
+  {
+    path: "/item-on-map",
+    route: ItemOnMapRoutes,
   },
 ];
 

@@ -11,6 +11,10 @@ const itemSchema = new Schema<IItem>(
       type: String,
       required: true,
     },
+    color: {
+      type: String,
+      required: true,
+    },
     price: {
       type: Number,
       required: true,

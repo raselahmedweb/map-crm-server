@@ -34,9 +34,11 @@ export const createItemOnMapZodSchema = z.object({
     .max(100, { message: "Progress must be 100 or less" })
     .optional(),
 
-  notes: z.array(
-    z.string({ invalid_type_error: "Notes must be a string" }).optional()
-  ),
+  notes: z
+    .array(
+      z.string({ invalid_type_error: "Notes must be a string" }).optional()
+    )
+    .optional(),
 
   x: z.number({ invalid_type_error: "X must be a number" }),
 
@@ -67,4 +69,10 @@ export const updateItemOnMapByInstallerZodSchema = z.object({
   notes: z.array(
     z.string({ invalid_type_error: "Notes must be a string" }).optional()
   ),
+});
+
+export const updateItemPositionSchema = z.object({
+  x: z.number({ invalid_type_error: "X must be a number" }),
+
+  y: z.number({ invalid_type_error: "Y must be a number" }),
 });

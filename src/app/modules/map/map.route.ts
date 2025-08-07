@@ -26,7 +26,17 @@ router.get(
   MapControllers.getAllMap
 );
 
-// ADMIN, ASSISTANT, COLLABORATOR, PROJECT_DESIGNER
+router.get(
+  "/single/:id",
+  checkAuth(
+    Role.ADMIN,
+    Role.ASSISTANT,
+    Role.COLLABORATOR,
+    Role.PROJECT_DESIGNER
+  ),
+  MapControllers.getMapById
+);
+
 router.get(
   "/:id",
   checkAuth(
@@ -50,7 +60,6 @@ router.patch(
   MapControllers.updateMap
 );
 
-// Only ADMIN, ASSISTANT, COLLABORATOR, PROJECT_DESIGNER can delete
 router.delete(
   "/:id",
   checkAuth(

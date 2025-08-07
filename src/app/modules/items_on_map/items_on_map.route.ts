@@ -6,6 +6,7 @@ import {
   createItemOnMapZodSchema,
   updateItemOnMapByInstallerZodSchema,
   updateItemOnMapZodSchema,
+  updateItemPositionSchema,
 } from "./items_on_map.validation";
 import { ItemOnMapControllers } from "./items_on_map.controller";
 
@@ -39,6 +40,17 @@ router.get(
 );
 
 // update by ADMIN, ASSISTANT, COLLABORATOR, PROJECT_DESIGNER
+router.patch(
+  "/change-position/:id",
+  checkAuth(
+    Role.ADMIN,
+    Role.ASSISTANT,
+    Role.COLLABORATOR,
+    Role.PROJECT_DESIGNER
+  ),
+  validateRequest(updateItemPositionSchema),
+  ItemOnMapControllers.changePosition
+);
 router.patch(
   "/:id",
   checkAuth(

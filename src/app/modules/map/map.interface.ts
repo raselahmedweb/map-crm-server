@@ -9,5 +9,6 @@ export interface IMap {
   bgImageUrl: string;
   availableDevices: Types.ObjectId[];
   isComplete: boolean;
+  isDeleted: boolean;
   customerNotes?: string;
 }

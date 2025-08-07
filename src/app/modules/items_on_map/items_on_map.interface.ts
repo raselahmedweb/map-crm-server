@@ -7,7 +7,7 @@ export interface IItemOnMap {
   userId: Types.ObjectId;
   salePrice?: number;
   progress?: number;
-  notes?: string;
+  notes?: string[];
   serial?: string;
   mac?: string;
   model?: string;

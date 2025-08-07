@@ -34,6 +34,23 @@ const updateItemOnMap = catchAsync(
     });
   }
 );
+const changePosition = catchAsync(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (req: Request, res: Response, next: NextFunction) => {
+    const itemOnMapId = req.params.id;
+    const payload = req.body;
+    const itemOnMap = await ItemOnMapServices.changePosition(
+      itemOnMapId,
+      payload
+    );
+    sendResponse(res, {
+      statusCode: httpStatusCode.CREATED,
+      success: true,
+      message: "ItemOnMap position updated successfully",
+      data: itemOnMap,
+    });
+  }
+);
 
 const getAllItemOnMap = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -68,4 +85,5 @@ export const ItemOnMapControllers = {
   updateItemOnMap,
   getAllItemOnMap,
   deleteItemOnMap,
+  changePosition,
 };

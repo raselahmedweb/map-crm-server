@@ -9,6 +9,10 @@ export const createItemZodSchema = z.object({
     .string({ invalid_type_error: "Shape must be a string" })
     .min(1, { message: "Shape is required" }),
 
+  color: z
+    .string({ invalid_type_error: "Color must be a string" })
+    .min(1, { message: "Color is required" }),
+
   price: z
     .number({ invalid_type_error: "Installation cost must be a number" })
     .nonnegative({ message: "Installation cost must be non-negative" }),
