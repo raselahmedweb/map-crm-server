@@ -1,17 +1,17 @@
 import { Router } from "express";
 import { checkAuth } from "../../middlewares/checkAuth";
-import { CompanyControllers } from "./company.controller";
+import { CustomerControllers } from "./customer.controller";
 import { Role } from "../user/user.interface";
 import { validateRequest } from "../../middlewares/validateRequest";
 import {
-  createCompanyZodSchema,
-  updateCompanyZodSchema,
-} from "./company.validation";
+  createCustomerZodSchema,
+  updateCustomerZodSchema,
+} from "./customer.validation";
 
 const router = Router();
 
 router.get(
-  "/all-companies",
+  "/all-customers",
   checkAuth(
     Role.ADMIN,
     Role.ASSISTANT,
@@ -20,27 +20,27 @@ router.get(
     Role.COLLABORATOR,
     Role.PROJECT_DESIGNER
   ),
-  CompanyControllers.getCompany
+  CustomerControllers.getCustomer
 );
 
 router.post(
   "/create",
   checkAuth(Role.ADMIN, Role.ASSISTANT),
-  validateRequest(createCompanyZodSchema),
-  CompanyControllers.createCompany
+  validateRequest(createCustomerZodSchema),
+  CustomerControllers.createCustomer
 );
 
 router.patch(
   "/:id",
   checkAuth(Role.ADMIN, Role.ASSISTANT),
-  validateRequest(updateCompanyZodSchema),
-  CompanyControllers.updateCompany
+  validateRequest(updateCustomerZodSchema),
+  CustomerControllers.updateCustomer
 );
 
 router.delete(
   "/:id",
   checkAuth(Role.ADMIN, Role.ASSISTANT),
-  CompanyControllers.deleteCompany
+  CustomerControllers.deleteCustomer
 );
 
-export const CompanyRoutes = router;
+export const CustomerRoutes = router;

@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
-import { ICompany } from "./company.interface";
+import { ICustomer } from "./customer.interface";
 
-const companySchema = new Schema<ICompany>(
+const CustomerSchema = new Schema<ICustomer>(
   {
     name: {
       type: String,
@@ -9,6 +9,10 @@ const companySchema = new Schema<ICompany>(
     },
     email: {
       type: String,
+    },
+    role: {
+      type: String,
+      required: true,
     },
     website: { type: String },
     logo: { type: String },
@@ -20,4 +24,4 @@ const companySchema = new Schema<ICompany>(
   { versionKey: false, timestamps: true }
 );
 
-export const Company = model<ICompany>("companies", companySchema);
+export const Customer = model<ICustomer>("customers", CustomerSchema);

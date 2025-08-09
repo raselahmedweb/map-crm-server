@@ -2,72 +2,72 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
-import { CompanyServices } from "./company.service";
+import { CustomerServices } from "./customer.service";
 
-const createCompany = catchAsync(
+const createCustomer = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const company = await CompanyServices.createCompany(req.body);
+    const customer = await CustomerServices.createCustomer(req.body);
     sendResponse(res, {
       statusCode: httpStatusCode.CREATED,
       success: true,
-      message: "Company created successfully",
-      data: company,
+      message: "Customer created successfully",
+      data: customer,
     });
   }
 );
 
-const updateCompany = catchAsync(
+const updateCustomer = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const companyId = req.params.id;
+    const CustomerId = req.params.id;
     const payload = req.body;
     const decodedToken = req.user;
-    const company = await CompanyServices.updateCompany(
-      companyId,
+    const customer = await CustomerServices.updateCustomer(
+      CustomerId,
       payload,
       decodedToken
     );
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Company updated successfully",
-      data: company,
+      message: "Customer updated successfully",
+      data: customer,
     });
   }
 );
 
-const getCompany = catchAsync(
+const getCustomer = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const company = await CompanyServices.getCompany();
+    const customer = await CustomerServices.getCustomer();
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Company retrieved successfully",
-      data: company,
+      message: "Customer retrieved successfully",
+      data: customer,
     });
   }
 );
 
-const deleteCompany = catchAsync(
+const deleteCustomer = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (req: Request, res: Response, next: NextFunction) => {
-    const companyId = req.params.id;
+    const CustomerId = req.params.id;
     const decodedToken = req.user;
-    await CompanyServices.deleteCompany(companyId, decodedToken);
+    await CustomerServices.deleteCustomer(CustomerId, decodedToken);
     sendResponse(res, {
       statusCode: httpStatusCode.OK,
       success: true,
-      message: "Company deleted successfully",
+      message: "Customer deleted successfully",
       data: null,
     });
   }
 );
 
-export const CompanyControllers = {
-  createCompany,
-  updateCompany,
-  getCompany,
-  deleteCompany,
+export const CustomerControllers = {
+  createCustomer,
+  updateCustomer,
+  getCustomer,
+  deleteCustomer,
 };

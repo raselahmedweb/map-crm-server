@@ -8,16 +8,12 @@ export const createProjectsZodSchema = z.object({
       message: "Invalid User ID format",
     }),
 
-  companyId: z
-    .string({ invalid_type_error: "Company ID must be a string" })
+  customerId: z
+    .string({ invalid_type_error: "customer ID must be a string" })
     .refine((val) => Types.ObjectId.isValid(val), {
-      message: "Invalid Company ID format",
+      message: "Invalid customer ID format",
     })
     .optional(),
-
-  imageUrl: z
-    .array(z.string({ invalid_type_error: "Image URL must be a string" }))
-    .nonempty({ message: "At least one image URL is required" }),
 
   name: z
     .string({ invalid_type_error: "Name must be a string" })

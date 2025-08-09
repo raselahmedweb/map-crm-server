@@ -8,19 +8,15 @@ const projectsSchema = new Schema<IProjects>(
       ref: "users",
       required: true,
     },
-    companyId: {
+    customerId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "companies",
-    },
-    imageUrl: {
-      type: [String],
-      required: true,
+      ref: "customers",
     },
     name: {
       type: String,
       required: true,
     },
-    isMapCreated: {
+    isSystemCreated: {
       type: Boolean,
       default: false,
     },

@@ -1,13 +1,14 @@
 import { Router } from "express";
 import { UserRoutes } from "../modules/user/user.route";
 import { AuthRoutes } from "../modules/auth/auth.route";
-import { CompanyRoutes } from "../modules/company/company.route";
+import { CustomerRoutes } from "../modules/customer/customer.route";
 import { SalesAppointmentRoutes } from "../modules/sales_appointment/sales_appointment.route";
 import { ProjectsRoutes } from "../modules/projects/projects.route";
 import { MapRoutes } from "../modules/map/map.route";
 import { ItemRoutes } from "../modules/items/item.route";
 import { InviteUserRoutes } from "../modules/invitation/invitation.route";
 import { ItemOnMapRoutes } from "../modules/items_on_map/items_on_map.route";
+import { ItemOnProjectRoutes } from "../modules/items_on_project/items_on_project.route";
 
 export const router = Router();
 
@@ -21,8 +22,8 @@ const moduleRoutes = [
     route: AuthRoutes,
   },
   {
-    path: "/company",
-    route: CompanyRoutes,
+    path: "/customer",
+    route: CustomerRoutes,
   },
   {
     path: "/sales-appointment",
@@ -43,6 +44,10 @@ const moduleRoutes = [
   {
     path: "/invite-user",
     route: InviteUserRoutes,
+  },
+  {
+    path: "/item-on-project",
+    route: ItemOnProjectRoutes,
   },
   {
     path: "/item-on-map",
