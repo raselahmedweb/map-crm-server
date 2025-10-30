@@ -7,14 +7,9 @@ const mapSchema = new Schema<IMap>(
       type: String,
       required: true,
     },
-    companyId: {
+    projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "companies",
-      required: true,
-    },
-    mapDesigner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
       required: true,
     },
     assignedTo: [
@@ -26,15 +21,6 @@ const mapSchema = new Schema<IMap>(
     ],
     bgImageUrl: {
       type: String,
-      required: true,
-    },
-    availableDevices: {
-      type: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "items",
-        },
-      ],
       required: true,
     },
     isComplete: {

@@ -28,7 +28,7 @@ const updateProjects = async (
 
 const getAllProjects = async () => {
   const projects = await Projects.find({})
-    .populate("userId", "name email picture")
+    .populate("userId", "name")
     .populate("customerId", "name");
   const total = await Projects.countDocuments();
   return { projects, total };
@@ -36,7 +36,7 @@ const getAllProjects = async () => {
 
 const getProject = async (projectId: string) => {
   const project = await Projects.findById(projectId)
-    .populate("userId", "name email picture")
+    .populate("userId", "name")
     .populate("customerId", "name");
   return project;
 };

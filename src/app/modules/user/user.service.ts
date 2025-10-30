@@ -67,9 +67,23 @@ const updateUser = async (userId: string, payload: Partial<IUser>) => {
   return newUpdateUser;
 };
 
-const getAllUsers = async () => {
-  const users = await User.find({}).select("-password");
-  const total = await User.countDocuments();
+const getAllUsers = async (name?: string, designation?: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const query: any = {};
+
+  if (name) {
+    query.$or = [
+      { name: { $regex: name, $options: "i" } },
+      { email: { $regex: name, $options: "i" } },
+    ];
+  }
+
+  if (designation) {
+    query.role = designation;
+  }
+
+  const users = await User.find(query).select("-password");
+  const total = await User.countDocuments(query);
 
   return { users, total };
 };

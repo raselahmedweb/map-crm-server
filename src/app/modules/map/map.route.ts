@@ -38,6 +38,17 @@ router.get(
 );
 
 router.get(
+  "/project/:id",
+  checkAuth(
+    Role.ADMIN,
+    Role.ASSISTANT,
+    Role.COLLABORATOR,
+    Role.PROJECT_DESIGNER
+  ),
+  MapControllers.getMapByProjectId
+);
+
+router.get(
   "/:id",
   checkAuth(
     Role.ADMIN,

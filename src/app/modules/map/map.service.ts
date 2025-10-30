@@ -57,6 +57,16 @@ const getMapById = async (id: string) => {
 
   return map;
 };
+const getMapByProjectId = async (id: string) => {
+  const map = await Map.find({ projectId: id })
+    .populate("companyId", "name")
+    .populate("mapDesigner", "name email")
+    .populate("assignedTo", "name email")
+    .populate("availableDevices", "label shape price")
+    .lean();
+
+  return map;
+};
 
 const deleteMap = async (mapId: string) => {
   const ifMapExist = await Map.findById(mapId);
@@ -81,5 +91,6 @@ export const MapServices = {
   getAllMap,
   getMapByAssignedId,
   getMapById,
+  getMapByProjectId,
   deleteMap,
 };
