@@ -7,8 +7,8 @@ import {
   updateItemOnMapByInstallerZodSchema,
   updateItemOnMapZodSchema,
   updateItemPositionSchema,
-} from "./items_on_map.validation";
-import { ItemOnMapControllers } from "./items_on_map.controller";
+} from "./device_on_map.validation";
+import { ItemOnMapControllers } from "./device_on_map.controller";
 
 const router = Router();
 
@@ -26,7 +26,7 @@ router.post(
 );
 
 router.get(
-  "/all-items-on-map/:id",
+  "/all-device-on-map/:id",
   checkAuth(
     Role.ADMIN,
     Role.ASSISTANT,

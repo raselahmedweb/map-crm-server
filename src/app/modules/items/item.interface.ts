@@ -1,8 +1,0 @@
-export interface IItem {
-  _id?: string;
-  label: string;
-  shape: string;
-  color: string;
-  price: number;
-  copies: number;
-}

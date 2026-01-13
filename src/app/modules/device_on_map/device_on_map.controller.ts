@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
-import { ItemOnMapServices } from "./items_on_map.service";
+import { ItemOnMapServices } from "./device_on_map.service";
 
 const createItemOnMap = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

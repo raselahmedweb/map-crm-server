@@ -2,8 +2,8 @@ import { Router } from "express";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { Role } from "../user/user.interface";
-import { ItemControllers } from "./item.controller";
-import { createItemZodSchema, updateItemZodSchema } from "./item.validation";
+import { ItemControllers } from "./device.controller";
+import { createItemZodSchema, updateItemZodSchema } from "./device.validation";
 
 const router = Router();
 
@@ -16,7 +16,7 @@ router.post(
 );
 
 router.get(
-  "/all-items-with-details",
+  "/all-device-with-details",
   checkAuth(Role.ADMIN),
   ItemControllers.getAllItem
 );

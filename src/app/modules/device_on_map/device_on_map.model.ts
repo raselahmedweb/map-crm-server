@@ -1,11 +1,11 @@
 import mongoose, { model, Schema } from "mongoose";
-import { IItemOnMap } from "./items_on_map.interface";
+import { IItemOnMap } from "./device_on_map.interface";
 
 const itemOnMapSchema = new Schema<IItemOnMap>(
   {
-    itemId: {
+    deviceId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "items",
+      ref: "devices",
       required: true,
     },
     mapId: {

@@ -5,10 +5,10 @@ import { CustomerRoutes } from "../modules/customer/customer.route";
 import { SalesAppointmentRoutes } from "../modules/sales_appointment/sales_appointment.route";
 import { ProjectsRoutes } from "../modules/projects/projects.route";
 import { MapRoutes } from "../modules/map/map.route";
-import { ItemRoutes } from "../modules/items/item.route";
+import { ItemRoutes } from "../modules/devices/device.route";
 import { InviteUserRoutes } from "../modules/invitation/invitation.route";
-import { ItemOnMapRoutes } from "../modules/items_on_map/items_on_map.route";
-import { ItemOnProjectRoutes } from "../modules/items_on_project/items_on_project.route";
+import { ItemOnMapRoutes } from "../modules/device_on_map/device_on_map.route";
+import { ItemOnProjectRoutes } from "../modules/device_on_project/device_on_project.route";
 
 export const router = Router();
 

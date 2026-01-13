@@ -1,11 +1,11 @@
 import mongoose, { model, Schema } from "mongoose";
-import { IItemOnProject } from "./items_on_project.interface";
+import { IItemOnProject } from "./device_on_project.interface";
 
 const itemOnProjectSchema = new Schema<IItemOnProject>(
   {
-    itemId: {
+    deviceId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "items",
+      ref: "devices",
       required: true,
     },
     projectId: {
@@ -20,10 +20,6 @@ const itemOnProjectSchema = new Schema<IItemOnProject>(
       type: Boolean,
       default: true,
     },
-    color: {
-      type: String,
-      required: true,
-    },
     count: {
       type: Number,
     },
@@ -32,6 +28,6 @@ const itemOnProjectSchema = new Schema<IItemOnProject>(
 );
 
 export const ItemOnProject = model<IItemOnProject>(
-  "itemonproject",
+  "deviceonprojects",
   itemOnProjectSchema
 );

@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { IItem } from "./item.interface";
+import { IItem, Shapes } from "./device.interface";
 
 const itemSchema = new Schema<IItem>(
   {
@@ -9,6 +9,7 @@ const itemSchema = new Schema<IItem>(
     },
     shape: {
       type: String,
+      enum: Object.values(Shapes),
       required: true,
     },
     color: {
@@ -27,4 +28,4 @@ const itemSchema = new Schema<IItem>(
   { versionKey: false }
 );
 
-export const Item = model<IItem>("items", itemSchema);
+export const Item = model<IItem>("devices", itemSchema);

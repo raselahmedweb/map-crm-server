@@ -1,7 +1,7 @@
 import AppError from "../../errorHelpers/AppError";
 import httpStatusCode from "http-status-codes";
-import { Item } from "./item.model";
-import { IItem } from "./item.interface";
+import { Item } from "./device.model";
+import { IItem } from "./device.interface";
 
 const createItem = async (payload: Partial<IItem>) => {
   const item = await Item.create(payload);

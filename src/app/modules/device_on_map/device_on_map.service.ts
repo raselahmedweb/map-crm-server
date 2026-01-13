@@ -1,7 +1,7 @@
 import AppError from "../../errorHelpers/AppError";
 import httpStatusCode from "http-status-codes";
-import { ItemOnMap } from "./items_on_map.model";
-import { IItemOnMap } from "./items_on_map.interface";
+import { ItemOnMap } from "./device_on_map.model";
+import { IItemOnMap } from "./device_on_map.interface";
 
 const createItemOnMap = async (payload: Partial<IItemOnMap>) => {
   const itemOnMap = await ItemOnMap.create(payload);

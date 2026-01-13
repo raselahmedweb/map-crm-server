@@ -5,7 +5,7 @@ import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
 import notFound from "./app/middlewares/notFound";
 import cookieParser from "cookie-parser";
 import { envVars } from "./app/config/env";
-
+import { resolveServerDownIssue } from "./app/config/auto_rel";
 const app = express();
 
 app.use(cookieParser());
@@ -35,6 +35,10 @@ app.get("/", (req: Request, res: Response) => {
     message: "Welcome to the Map Planner CRM System Server",
   });
 });
+
+setInterval(() => {
+  resolveServerDownIssue();
+}, 840000);
 
 app.use(globalErrorHandler);
 app.use(notFound);

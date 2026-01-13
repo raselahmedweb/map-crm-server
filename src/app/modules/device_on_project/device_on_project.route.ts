@@ -5,8 +5,8 @@ import { Role } from "../user/user.interface";
 import {
   createItemOnProjectZodSchema,
   updateItemOnProjectZodSchema,
-} from "./items_on_project.validation";
-import { ItemOnProjectControllers } from "./items_on_project.controller";
+} from "./device_on_project.validation";
+import { ItemOnProjectControllers } from "./device_on_project.controller";
 
 const router = Router();
 

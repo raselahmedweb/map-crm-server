@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 export interface IItemOnMap {
   _id?: string;
-  itemId: Types.ObjectId;
+  deviceId: Types.ObjectId;
   mapId: Types.ObjectId;
   userId: Types.ObjectId;
   salePrice?: number;

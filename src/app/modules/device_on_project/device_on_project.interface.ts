@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 export interface IItemOnProject {
   _id?: string;
-  itemId: Types.ObjectId;
+  deviceId: Types.ObjectId;
   projectId: Types.ObjectId;
   price: number;
   isVisible: boolean;

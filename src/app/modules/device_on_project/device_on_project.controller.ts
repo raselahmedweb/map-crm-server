@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import httpStatusCode from "http-status-codes";
-import { ItemOnProjectServices } from "./items_on_project.service";
+import { ItemOnProjectServices } from "./device_on_project.service";
 
 const createItemOnProject = catchAsync(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
