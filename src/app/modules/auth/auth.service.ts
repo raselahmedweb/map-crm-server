@@ -16,6 +16,8 @@ const credentialsLogin = async (payload: Partial<IUser>) => {
   // eslint-disable-next-line no-console
   console.log(email, password);
   const isExistUser = await User.findOne({ email });
+  // eslint-disable-next-line no-console
+  console.log(isExistUser)
   if (!isExistUser) {
     throw new AppError(httpStatusCode.BAD_REQUEST, "Email does not exist");
   }
